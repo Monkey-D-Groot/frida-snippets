@@ -1036,6 +1036,28 @@ TODO
 
 <br>[⬆ Back to top](#table-of-contents)
 
+
+
+#### Get Stack trace
+```js
+Java.use('java.lang.StringBuilder').$init.overload('java.lang.String').implementation = function(stringArgument) {
+      var string = Java.use('java.lang.String');
+      var stack = Java.use("java.lang.Thread");
+      var array = Java.use("java.util.Arrays");
+      var stackTrace = array.toString(stack.currentThread().getStackTrace());
+      stackTrace = string.$new(stackTrace).replaceAll(",","\\n             =>");
+      send("Strack trace " + stackTrace);
+      return this.$init(stringArgument);
+};
+```
+
+<details>
+<summary>Output example</summary>
+TODO
+</details>
+
+<br>[⬆ Back to top](#table-of-contents)
+
 #### Hook reflection
 
 `java.lang.reflect.Method#invoke(Object obj, Object... args, boolean bool)`
