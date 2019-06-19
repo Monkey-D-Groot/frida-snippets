@@ -817,7 +817,14 @@ function binaryToHexToAscii(array, readLimit) {
     }
     return result.join('');
 }
-
+function bytesToHex(bytes) {
+	for (var hex = [], i = 0; i < bytes.length; i++) { 
+		hex.push(((bytes[i] >>> 4) & 0xF).toString(16).toUpperCase());
+		hex.push((bytes[i] & 0xF).toString(16).toUpperCase());
+		hex.push("");
+	}
+	return hex.join("");
+}
 function hookInputStream() {
     Java.use('java.io.InputStream')['read'].overload('[B').implementation = function(b) {
         // execute original and save return value
